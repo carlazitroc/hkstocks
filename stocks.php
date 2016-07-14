@@ -20,8 +20,9 @@ include('header.html');
     //          var stock_num_index = stock_num_from_index;
     //     }
     // });
-    Pace.track(function(){
     $(document).ready(function(){
+      $('#loadingmessage').show();
+
         var stock_num_from_index = '<?php echo $stock_num ?>';
 
         var vstock_num;
@@ -29,7 +30,7 @@ include('header.html');
         {
             vstock_num = $("#stock_num").val();
             stock_num_from_index = '';
-            
+            $('#loadingmessage').show();
             $.post("data.php",
                 {stock_num: vstock_num,
                  stock_num_index: stock_num_from_index},
@@ -39,7 +40,8 @@ include('header.html');
                     try{
                        var obj = $.parseJSON(response);
                     }catch(err){
-                       $('#errorModal').modal('show');
+                      $('#loadingmessage').hide();
+                      $('#errorModal').modal('show');
                     }
                     
                     //child data
@@ -184,6 +186,7 @@ include('header.html');
                     });
                     chart.render();
 
+                    $('#loadingmessage').hide();
                 });
 
 
@@ -199,7 +202,8 @@ include('header.html');
                     try{
                        var obj = $.parseJSON(response);
                     }catch(err){
-                       $('#errorModal').modal('show');
+                      $('#loadingmessage').hide();
+                      $('#errorModal').modal('show');
                     }
                     
                     //child data
@@ -344,8 +348,8 @@ include('header.html');
                     });
                     chart.render();
 
+                    $('#loadingmessage').hide();
                 });
-    });
     });
     </script>
     <div class="container">
@@ -403,8 +407,8 @@ include('header.html');
         </div>
       </section>
 
-      <section>
-          <div id="symbolContainer"></div>
+      <section id='loadingmessage' class="text-center" style="display: none;">
+        <img src='img/ajax-loader.gif'/>
       </section>
 	      
       <!--graph-->

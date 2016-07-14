@@ -17,7 +17,7 @@ else{
     if (isset($_POST["stock_num_index"]) && !empty($_POST["stock_num_index"]))      { $dataset_code_index = $_POST['stock_num_index'];
 
     $url = 'https://www.quandl.com/api/v3/datasets/XHKG/'.$dataset_code_index.'.xml?api_key=NzzkduZp5xEeyoC6q-oR';
-    $url = 'data/'.$dataset_code_index.'.xml';
+    //$url = 'data/'.$dataset_code_index.'.xml';
     $xml = xmltojson($url);
 
     echo $xml;
